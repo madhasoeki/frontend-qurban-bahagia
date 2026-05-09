@@ -167,7 +167,7 @@
 				<IconPlus class="h-4 w-4 sm:mr-1" />
 				<span class="hidden sm:inline">Tambah Hewan</span>
 			</Dialog.Trigger>
-			<Dialog.Content class="max-w-lg">
+			<Dialog.Content class="max-w-3xl">
 				<Dialog.Header>
 					<Dialog.Title>Tambah Hewan</Dialog.Title>
 					<Dialog.Description>Isi data hewan qurban baru.</Dialog.Description>
@@ -238,7 +238,7 @@
 
 <!-- Edit Dialog -->
 <Dialog.Root bind:open={editOpen}>
-	<Dialog.Content class="max-w-lg">
+	<Dialog.Content class="max-w-3xl">
 		<Dialog.Header>
 			<Dialog.Title>Edit Hewan</Dialog.Title>
 			<Dialog.Description>Perbarui data hewan.</Dialog.Description>
