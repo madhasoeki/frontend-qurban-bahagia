@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
+	import EmptyState from '$lib/components/empty-state.svelte';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
@@ -102,8 +104,8 @@
 				{/each}
 				{#if distribusiList.length === 0}
 					<Table.Row>
-						<Table.Cell colspan={4} class="text-center py-8 text-muted-foreground">
-							Belum ada data distribusi
+						<Table.Cell colspan={4} class="p-0">
+							<EmptyState title="Data masih kosong" description="Belum ada data distribusi yang bisa ditampilkan saat ini." />
 						</Table.Cell>
 					</Table.Row>
 				{/if}
@@ -129,6 +131,7 @@
 			<Dialog.Footer>
 				<Button variant="outline" onclick={() => dialogOpen = false}>Batal</Button>
 				<Button onclick={handleAdminUpdate} disabled={actionLoading}>
+					{#if actionLoading}<Spinner class="mr-2" />{/if}
 					{actionLoading ? 'Menyimpan...' : 'Simpan Perubahan'}
 				</Button>
 			</Dialog.Footer>
@@ -167,7 +170,7 @@
 					onclick={() => handlePanitiaUpdate(-1)}
 					disabled={actionLoading}
 				>
-					<IconMinus class="h-8 w-8" />
+					{#if actionLoading}<Spinner class="h-8 w-8" />{:else}<IconMinus class="h-8 w-8" />{/if}
 				</Button>
 				
 				<div class="h-full w-[50%] relative flex">
@@ -198,7 +201,7 @@
 					onclick={() => handlePanitiaUpdate(1)}
 					disabled={actionLoading}
 				>
-					<IconPlus class="h-8 w-8" />
+					{#if actionLoading}<Spinner class="h-8 w-8" />{:else}<IconPlus class="h-8 w-8" />{/if}
 				</Button>
 			</ButtonGroup.Root>
 		</div>

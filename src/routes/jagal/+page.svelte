@@ -3,6 +3,7 @@
 	import FilterToolbar from '$lib/components/filter-toolbar.svelte';
 	import ConfirmDialog from '$lib/components/confirm-dialog.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconPlayerPlay, IconPlayerStop } from '@tabler/icons-svelte';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { updateProgress } from '$lib/api/progress';
@@ -110,6 +111,7 @@
 			disabled={actionLoading[item.id!]}
 		>
 			<IconPlayerPlay class="h-4 w-4 mr-1" />
+			{#if actionLoading[item.id!]}<Spinner class="mr-1" />{/if}
 			{actionLoading[item.id!] ? 'Memulai...' : 'Mulai Jagal'}
 		</Button>
 	{:else if status === 'running'}
@@ -124,6 +126,7 @@
 				disabled={actionLoading[item.id!]}
 			>
 				<IconPlayerStop class="h-4 w-4 mr-1" />
+				{#if actionLoading[item.id!]}<Spinner class="mr-1" />{/if}
 				{actionLoading[item.id!] ? 'Menyimpan...' : 'Selesai'}
 			</Button>
 		</div>

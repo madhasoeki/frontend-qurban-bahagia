@@ -1,6 +1,7 @@
 <script lang="ts">
 	import HewanList from '$lib/components/hewan-list.svelte';
 	import { Button, buttonVariants } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconDots, IconPlus, IconFilter, IconX, IconSearch } from '@tabler/icons-svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
@@ -274,6 +275,7 @@
 				disabled={deleteLoading}
 				class={buttonVariants({ variant: 'destructive' })}
 			>
+				{#if deleteLoading}<Spinner class="mr-2" />{/if}
 				{deleteLoading ? 'Menghapus...' : 'Hapus'}
 			</AlertDialog.Action>
 		</AlertDialog.Footer>

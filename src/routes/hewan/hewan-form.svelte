@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
 	import * as Select from '$lib/components/ui/select/index.js';
 	import { Field, FieldGroup, FieldLabel } from '$lib/components/ui/field/index.js';
@@ -173,7 +174,10 @@
 
 		<div class="flex justify-end gap-2">
 			<Button type="button" variant="outline" onclick={oncancel} disabled={loading}>Batal</Button>
-			<Button type="submit" disabled={loading}>{loading ? 'Menyimpan...' : 'Simpan'}</Button>
+			<Button type="submit" disabled={loading}>
+				{#if loading}<Spinner class="mr-2" />{/if}
+				{loading ? 'Menyimpan...' : 'Simpan'}
+			</Button>
 		</div>
 	</FieldGroup>
 </form>

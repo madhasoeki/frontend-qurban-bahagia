@@ -1,6 +1,8 @@
 <script lang="ts">
 	import * as Table from '$lib/components/ui/table/index.js';
 	import { Button, buttonVariants } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
+	import EmptyState from '$lib/components/empty-state.svelte';
 	import { IconDots, IconPlus, IconFilter, IconSearch } from '@tabler/icons-svelte';
 	import * as DropdownMenu from '$lib/components/ui/dropdown-menu/index.js';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
@@ -214,6 +216,9 @@
 {/if}
 
 <!-- Tabel -->
+{#if users.length === 0}
+	<EmptyState title="Data masih kosong" description="Belum ada data user yang bisa ditampilkan saat ini." />
+{:else}
 <Table.Root>
 	<Table.Caption>Daftar User Qurban Bahagia App</Table.Caption>
 	<Table.Header>
@@ -255,6 +260,7 @@
 		{/each}
 	</Table.Body>
 </Table.Root>
+{/if}
 
 <!-- Delete Confirm -->
 <AlertDialog.Root bind:open={deleteOpen}>
@@ -275,6 +281,7 @@
 				disabled={deleteLoading}
 				class={buttonVariants({ variant: 'destructive' })}
 			>
+				{#if deleteLoading}<Spinner class="mr-2" />{/if}
 				{deleteLoading ? 'Menghapus...' : 'Hapus'}
 			</AlertDialog.Action>
 		</AlertDialog.Footer>

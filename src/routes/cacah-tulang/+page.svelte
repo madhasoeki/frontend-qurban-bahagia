@@ -3,6 +3,7 @@
 	import FilterToolbar from '$lib/components/filter-toolbar.svelte';
 	import ConfirmDialog from '$lib/components/confirm-dialog.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconPlayerPlay, IconPlayerStop } from '@tabler/icons-svelte';
 	import { Badge } from '$lib/components/ui/badge/index.js';
 	import { updateProgress } from '$lib/api/progress';
@@ -80,13 +81,13 @@
 {#snippet Action(item: ProgressHewan, status: 'idle' | 'running' | 'done')}
 	{#if status === 'idle'}
 		<Button size="sm" onclick={() => requestAction('Mulai Cacah Tulang', `Yakin ingin memulai proses cacah tulang untuk hewan ${item.kodeHewan}?`, () => handleCacahTulang(item.id!, 'mulai'))} disabled={actionLoading[item.id!]}>
-			<IconPlayerPlay class="h-4 w-4 mr-1" />{actionLoading[item.id!] ? 'Memulai...' : 'Mulai Cacah Tulang'}
+			<IconPlayerPlay class="h-4 w-4 mr-1" />{#if actionLoading[item.id!]}<Spinner class="mr-1" />{/if}{actionLoading[item.id!] ? 'Memulai...' : 'Mulai Cacah Tulang'}
 		</Button>
 	{:else if status === 'running'}
 		<div class="flex items-center gap-2">
 			<Badge variant="secondary" class="tabular-nums font-mono text-sm">{formatDuration(item.waktuMulaiCacahTulang!, null, now)}</Badge>
 			<Button size="sm" variant="destructive" onclick={() => requestAction('Selesai Cacah Tulang', `Yakin ingin menyelesaikan proses cacah tulang untuk hewan ${item.kodeHewan}?`, () => handleCacahTulang(item.id!, 'selesai'))} disabled={actionLoading[item.id!]}>
-				<IconPlayerStop class="h-4 w-4 mr-1" />{actionLoading[item.id!] ? 'Menyimpan...' : 'Selesai'}
+				<IconPlayerStop class="h-4 w-4 mr-1" />{#if actionLoading[item.id!]}<Spinner class="mr-1" />{/if}{actionLoading[item.id!] ? 'Menyimpan...' : 'Selesai'}
 			</Button>
 		</div>
 	{:else}

@@ -1,6 +1,7 @@
 <script lang="ts" generics="T extends BaseHewan">
 	import * as Table from '$lib/components/ui/table/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
+	import EmptyState from '$lib/components/empty-state.svelte';
 	import type { BaseHewan } from '$lib/types/hewan';
 	import type { Snippet } from 'svelte';
 
@@ -25,6 +26,9 @@
 	} = $props();
 </script>
 
+{#if items.length === 0}
+	<EmptyState title="Data masih kosong" description="Belum ada data hewan yang bisa ditampilkan saat ini." />
+{:else}
 <!-- Mobile: Card List -->
 <div class="grid gap-3 md:hidden">
 	{#each items as item (item.id)}
@@ -116,3 +120,4 @@
 		</Table.Body>
 	</Table.Root>
 </div>
+{/if}

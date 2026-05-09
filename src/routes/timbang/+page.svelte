@@ -2,6 +2,7 @@
 	import HewanList from '$lib/components/hewan-list.svelte';
 	import FilterToolbar from '$lib/components/filter-toolbar.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconDeviceFloppy } from '@tabler/icons-svelte';
 	import * as Table from '$lib/components/ui/table/index.js';
 	import Input from '$lib/components/ui/input/input.svelte';
@@ -97,8 +98,8 @@
 				<div class="flex gap-2">
 					<Button size="sm" variant="ghost" onclick={() => isEditing[item.id!] = false} disabled={actionLoading[item.id!]}>Batal</Button>
 					<Button size="sm" onclick={() => handleTimbang(item.id!)} disabled={actionLoading[item.id!]}>
-						<IconDeviceFloppy class="h-4 w-4 md:mr-1" />
-						<span class="hidden md:inline">{actionLoading[item.id!] ? '...' : 'Simpan'}</span>
+						{#if actionLoading[item.id!]}<Spinner class="h-4 w-4 md:mr-1" />{:else}<IconDeviceFloppy class="h-4 w-4 md:mr-1" />{/if}
+						<span class="hidden md:inline">{actionLoading[item.id!] ? 'Menyimpan...' : 'Simpan'}</span>
 					</Button>
 				</div>
 			</div>

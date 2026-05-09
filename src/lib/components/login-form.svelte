@@ -4,6 +4,7 @@
 	import { FieldGroup, Field, FieldLabel } from '$lib/components/ui/field/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import * as InputGroup from '$lib/components/ui/input-group/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconEye, IconEyeOff } from '@tabler/icons-svelte';
 	import { cn } from '$lib/utils.js';
 	import type { HTMLAttributes } from 'svelte/elements';
@@ -88,6 +89,7 @@
 
 					<Field>
 						<Button type="submit" disabled={loading}>
+							{#if loading}<Spinner class="mr-2" />{/if}
 							{loading ? 'Loading...' : 'Login'}
 						</Button>
 					</Field>

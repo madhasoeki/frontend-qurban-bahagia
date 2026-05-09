@@ -3,6 +3,7 @@
 	import FilterToolbar from '$lib/components/filter-toolbar.svelte';
 	import ConfirmDialog from '$lib/components/confirm-dialog.svelte';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import { Spinner } from '$lib/components/ui/spinner/index.js';
 	import { IconPlayerPlay, IconPlayerStop, IconEdit } from '@tabler/icons-svelte';
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import * as Table from '$lib/components/ui/table/index.js';
@@ -129,7 +130,7 @@
 	{@const status = getProcessStatus(item.waktuMulaiPacking, item.waktuSelesaiPacking)}
 	{#if status === 'idle'}
 		<Button size="sm" onclick={() => requestAction('Mulai Packing', `Yakin ingin memulai proses packing untuk hewan ${item.kodeHewan}?`, () => handleMulai(item.id!))} disabled={actionLoading[item.id!]}>
-			<IconPlayerPlay class="h-4 w-4 mr-1" />{actionLoading[item.id!] ? 'Memulai...' : 'Mulai Packing'}
+			<IconPlayerPlay class="h-4 w-4 mr-1" />{#if actionLoading[item.id!]}<Spinner class="mr-1" />{/if}{actionLoading[item.id!] ? 'Memulai...' : 'Mulai Packing'}
 		</Button>
 	{:else if status === 'running'}
 		<div class="flex items-center gap-2">
