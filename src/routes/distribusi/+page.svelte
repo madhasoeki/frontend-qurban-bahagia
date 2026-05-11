@@ -183,18 +183,16 @@
 					{#if actionLoading}<Spinner class="h-6 w-6" />{:else}<IconMinus class="h-6 w-6" />{/if}
 				</Button>
 
-				<Separator orientation="vertical" class="h-8" />
+				<Separator orientation="vertical" class="h-8 shrink-0" />
 
-				<Dialog.Root bind:open={manualDialogOpen}>
-					<Dialog.Trigger>
-						<Button
-							variant="ghost"
-							class="h-full w-[50%] rounded-none text-base font-semibold"
+				<div class="flex-1 h-full">
+					<Dialog.Root bind:open={manualDialogOpen}>
+						<Dialog.Trigger
 							disabled={actionLoading}
+							class="h-full w-full flex items-center justify-center gap-2 text-sm font-semibold hover:bg-muted transition-colors"
 						>
 							Manual
-						</Button>
-					</Dialog.Trigger>
+						</Dialog.Trigger>
 					<Dialog.Content class="sm:max-w-[420px]">
 						<Dialog.Header>
 							<Dialog.Title>Input Manual</Dialog.Title>
@@ -250,9 +248,10 @@
 							</Button>
 						</Dialog.Footer>
 					</Dialog.Content>
-				</Dialog.Root>
+					</Dialog.Root>
+				</div>
 
-				<Separator orientation="vertical" class="h-8" />
+				<Separator orientation="vertical" class="h-8 shrink-0" />
 
 				<!-- Plus -->
 				<Button
