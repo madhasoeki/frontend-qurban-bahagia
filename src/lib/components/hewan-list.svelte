@@ -74,7 +74,7 @@
 
 <!-- Desktop: Table -->
 <div class="hidden md:block">
-	<Table.Root>
+	<Table.Root class="w-full table-fixed">
 		<Table.Caption>{caption}</Table.Caption>
 		<Table.Header>
 			<Table.Row>
@@ -106,7 +106,9 @@
 						</div>
 					</Table.Cell>
 					<Table.Cell>{item.pengawasNama}</Table.Cell>
-					<Table.Cell class="text-sm text-muted-foreground">{item.catatan || '-'}</Table.Cell>
+					<Table.Cell class="text-sm text-muted-foreground whitespace-normal break-words">
+						{item.catatan || '-'}
+					</Table.Cell>
 					{#if extraCell}
 						{@render extraCell(item)}
 					{/if}
