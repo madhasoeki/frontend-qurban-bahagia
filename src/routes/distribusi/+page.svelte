@@ -193,7 +193,7 @@
 						>
 							Manual
 						</Dialog.Trigger>
-					<Dialog.Content class="sm:max-w-[420px]">
+						<Dialog.Content class="sm:max-w-[420px]">
 						<Dialog.Header>
 							<Dialog.Title>Input Manual</Dialog.Title>
 							<Dialog.Description>
@@ -264,4 +264,5 @@
 				</Button>
 			</div>
 		</div>
+	</div>
 {/if}
