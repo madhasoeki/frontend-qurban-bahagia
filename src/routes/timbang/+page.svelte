@@ -113,11 +113,11 @@
 {/snippet}
 
 {#snippet extraHeader()}
-	<Table.Head class="text-center">Berat (Kg)</Table.Head>
+	<Table.Head class="w-28 text-center">Berat (Kg)</Table.Head>
 {/snippet}
 
 {#snippet extraCell(item: ProgressHewan)}
-	<Table.Cell class="align-top">
+	<Table.Cell class="align-top w-28">
 		<div class="flex flex-col text-xs text-muted-foreground whitespace-nowrap">
 			<span>Daging: <span class="font-semibold text-foreground">{item.beratDaging}</span></span>
 			<span>Tulang: <span class="font-semibold text-foreground">{item.beratTulang}</span></span>

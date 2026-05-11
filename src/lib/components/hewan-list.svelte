@@ -78,9 +78,9 @@
 		<Table.Caption>{caption}</Table.Caption>
 		<Table.Header>
 			<Table.Row>
-				<Table.Head>Kode</Table.Head>
-				<Table.Head>Tipe</Table.Head>
-				<Table.Head>Jenis</Table.Head>
+				<Table.Head class="w-24 whitespace-nowrap">Kode</Table.Head>
+				<Table.Head class="w-20 whitespace-nowrap">Tipe</Table.Head>
+				<Table.Head class="w-20 whitespace-nowrap">Jenis</Table.Head>
 				<Table.Head>Sohibul</Table.Head>
 				<Table.Head>Pengawas</Table.Head>
 				<Table.Head>Catatan</Table.Head>
@@ -88,16 +88,16 @@
 					{@render extraHeader()}
 				{/if}
 				{#if tableAction}
-					<Table.Head class="text-center">{actionHeader}</Table.Head>
+					<Table.Head class="w-36 text-center whitespace-nowrap">{actionHeader}</Table.Head>
 				{/if}
 			</Table.Row>
 		</Table.Header>
 		<Table.Body>
 			{#each items as item (item.id)}
 				<Table.Row>
-					<Table.Cell class="font-medium">{item.kodeHewan}</Table.Cell>
-					<Table.Cell class="capitalize">{item.tipe}</Table.Cell>
-					<Table.Cell class="capitalize">{item.jenisHewan}</Table.Cell>
+					<Table.Cell class="font-medium whitespace-nowrap">{item.kodeHewan}</Table.Cell>
+					<Table.Cell class="capitalize text-sm whitespace-nowrap">{item.tipe}</Table.Cell>
+					<Table.Cell class="capitalize text-sm whitespace-nowrap">{item.jenisHewan}</Table.Cell>
 					<Table.Cell>
 						<div class="flex flex-col gap-0.5">
 							{#each item.namaSohibul as nama}
@@ -113,7 +113,7 @@
 						{@render extraCell(item)}
 					{/if}
 					{#if tableAction}
-						<Table.Cell class="text-center">
+						<Table.Cell class="w-36 text-center">
 							{@render tableAction(item)}
 						</Table.Cell>
 					{/if}

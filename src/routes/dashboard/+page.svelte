@@ -593,7 +593,17 @@
 
             <Table.Row>
               <Table.Cell>{row.kodeHewan}</Table.Cell>
-              <Table.Cell>{row.namaSohibul?.join(", ") || "-"}</Table.Cell>
+              <Table.Cell>
+                {#if row.namaSohibul?.length > 1}
+                  <ol class="list-decimal pl-4 space-y-0.5">
+                    {#each row.namaSohibul as nama}
+                      <li>{nama}</li>
+                    {/each}
+                  </ol>
+                {:else}
+                  {row.namaSohibul?.[0] || "-"}
+                {/if}
+              </Table.Cell>
 
               <Table.Cell class="text-center">{@render ProcessBadge(row.waktuMulaiJagal, row.waktuSelesaiJagal)}</Table.Cell>
               <Table.Cell class="text-center">{@render ProcessBadge(row.waktuMulaiKuliti, row.waktuSelesaiKuliti)}</Table.Cell>

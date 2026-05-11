@@ -179,15 +179,15 @@
 {/snippet}
 
 {#snippet extraHeader()}
-	<Table.Head class="text-center">Status</Table.Head>
-	<Table.Head class="text-center">Hasil</Table.Head>
-	<Table.Head class="text-center">Kelengkapan</Table.Head>
+	<Table.Head class="w-32 text-center">Status</Table.Head>
+	<Table.Head class="w-32 text-center">Hasil</Table.Head>
+	<Table.Head class="w-32 text-center">Kelengkapan</Table.Head>
 {/snippet}
 
 {#snippet extraCell(item: ProgressHewan)}
-	<Table.Cell class="align-top">{@render StatusBadges(item)}</Table.Cell>
-	<Table.Cell class="align-top">{@render HasilPreview(item)}</Table.Cell>
-	<Table.Cell class="align-top">{@render KelengkapanPreview(item)}</Table.Cell>
+	<Table.Cell class="align-top w-32">{@render StatusBadges(item)}</Table.Cell>
+	<Table.Cell class="align-top w-32">{@render HasilPreview(item)}</Table.Cell>
+	<Table.Cell class="align-top w-32">{@render KelengkapanPreview(item)}</Table.Cell>
 {/snippet}
 
 {#snippet catatanFooter(item: ProgressHewan)}
