@@ -44,9 +44,15 @@
 				<div class="flex gap-2">
 					<span class="w-20 shrink-0 text-muted-foreground">Sohibul</span>
 					<div class="flex flex-col gap-0.5">
-						{#each item.namaSohibul as nama}
-							<span>{nama}</span>
-						{/each}
+						{#if item.namaSohibul?.length > 1}
+							<ol class="list-decimal pl-4 space-y-0.5">
+								{#each item.namaSohibul as nama}
+									<li>{nama}</li>
+								{/each}
+							</ol>
+						{:else}
+							<span>{item.namaSohibul?.[0] || '-'}</span>
+						{/if}
 					</div>
 				</div>
 				<div class="flex gap-2">

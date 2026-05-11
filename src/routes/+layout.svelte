@@ -53,7 +53,7 @@
 	<Sidebar.Provider>
 		<AppSidebar />
 		<Sidebar.Inset>
-			<header class="flex h-13 shrink-0 items-center gap-2 border-b px-4">
+			<header class="fixed top-0 z-50 flex h-13 w-full shrink-0 items-center gap-2 border-b bg-background px-4">
 				<Sidebar.Trigger class="-ms-1" />
 				<Separator orientation="vertical" class="me-2 h-4" />
 				<Breadcrumb.Root>
@@ -75,7 +75,7 @@
 					</Button>
 				</div>
 			</header>
-			<main class="p-4">
+			<main class="p-4 pt-16">
 				{@render children?.()}
 			</main>
 		</Sidebar.Inset>

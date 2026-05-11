@@ -6,6 +6,7 @@
 	import * as Dialog from '$lib/components/ui/dialog/index.js';
 	import * as Card from '$lib/components/ui/card/index.js';
 	import * as ButtonGroup from '$lib/components/ui/button-group/index.js';
+	import * as Tabs from '$lib/components/ui/tabs/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
 	import { updateKantongDistribusi } from '$lib/api/distribusi';
@@ -50,6 +51,12 @@
 
 	// --- Distribusi State ---
 	let manualInput = $state<number | string>('');
+	let manualDialogOpen = $state(false);
+	let manualMode = $state<'kurangi' | 'tambah'>('tambah');
+
+	$effect(() => {
+		if (manualDialogOpen) manualInput = '';
+	});
 
 	async function handlePanitiaUpdate(val: number) {
 		if (isNaN(val) || val === 0) return;
@@ -65,11 +72,12 @@
 		}
 	}
 
-	function submitManual() {
+	function submitManualDialog() {
 		const val = Number(manualInput);
-		if (!isNaN(val) && val !== 0) {
-			handlePanitiaUpdate(val);
-		}
+		if (isNaN(val) || val === 0) return;
+		const signedVal = manualMode === 'kurangi' ? -Math.abs(val) : Math.abs(val);
+		manualDialogOpen = false;
+		handlePanitiaUpdate(signedVal);
 	}
 </script>
 
@@ -172,28 +180,67 @@
 				>
 					{#if actionLoading}<Spinner class="h-8 w-8" />{:else}<IconMinus class="h-8 w-8" />{/if}
 				</Button>
-				
-				<div class="h-full w-[50%] relative flex">
-					<Input 
-						type="number" 
-						class="h-full w-full text-center text-2xl font-bold rounded-none border-y-0 border-x focus-visible:ring-0 focus-visible:ring-offset-0 px-2" 
-						placeholder="Manual" 
-						bind:value={manualInput}
-						onkeydown={(e) => e.key === 'Enter' && submitManual()}
-						disabled={actionLoading}
-					/>
-					<!-- Manual Submit Button (shows when typing) -->
-					{#if String(manualInput).length > 0}
+
+				<Dialog.Root bind:open={manualDialogOpen}>
+					<Dialog.Trigger>
 						<Button 
-							size="icon" 
-							variant="default"
-							class="absolute right-1.5 top-1.5 bottom-1.5 w-10 h-auto rounded-full shadow-md animate-in fade-in zoom-in"
-							onclick={submitManual}
+							variant="ghost" 
+							class="h-full w-[50%] text-base font-semibold rounded-none"
+							disabled={actionLoading}
 						>
-							<IconRefresh class="h-5 w-5" />
+							<IconRefresh class="h-5 w-5 mr-2" /> Manual
 						</Button>
-					{/if}
-				</div>
+					</Dialog.Trigger>
+					<Dialog.Content class="sm:max-w-[420px]">
+						<Dialog.Header>
+							<Dialog.Title>Input Manual</Dialog.Title>
+							<Dialog.Description>
+								Pilih mode lalu isi jumlah kantong yang akan diubah.
+							</Dialog.Description>
+						</Dialog.Header>
+						<Tabs.Root bind:value={manualMode} class="mt-2">
+							<Tabs.List class="grid grid-cols-2 w-full">
+								<Tabs.Trigger value="kurangi">Kurangi</Tabs.Trigger>
+								<Tabs.Trigger value="tambah">Tambahkan</Tabs.Trigger>
+							</Tabs.List>
+							<Tabs.Content value="kurangi" class="pt-4">
+								<div class="grid gap-2">
+									<Label for="manual-kurangi">Jumlah</Label>
+									<Input 
+										id="manual-kurangi"
+										type="number"
+										min="1"
+										placeholder="Masukkan jumlah yang dikurangi"
+										bind:value={manualInput}
+										onkeydown={(e) => e.key === 'Enter' && submitManualDialog()}
+										disabled={actionLoading}
+									/>
+								</div>
+							</Tabs.Content>
+							<Tabs.Content value="tambah" class="pt-4">
+								<div class="grid gap-2">
+									<Label for="manual-tambah">Jumlah</Label>
+									<Input 
+										id="manual-tambah"
+										type="number"
+										min="1"
+										placeholder="Masukkan jumlah yang ditambahkan"
+										bind:value={manualInput}
+										onkeydown={(e) => e.key === 'Enter' && submitManualDialog()}
+										disabled={actionLoading}
+									/>
+								</div>
+							</Tabs.Content>
+						</Tabs.Root>
+						<Dialog.Footer>
+							<Button variant="outline" onclick={() => (manualDialogOpen = false)} disabled={actionLoading}>Batal</Button>
+							<Button onclick={submitManualDialog} disabled={actionLoading}>
+								{#if actionLoading}<Spinner class="mr-2" />{/if}
+								{actionLoading ? 'Menyimpan...' : 'Simpan'}
+							</Button>
+						</Dialog.Footer>
+					</Dialog.Content>
+				</Dialog.Root>
 
 				<Button 
 					variant="default" 
