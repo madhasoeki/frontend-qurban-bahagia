@@ -9,6 +9,7 @@
 	import * as Tabs from '$lib/components/ui/tabs/index.js';
 	import { Input } from '$lib/components/ui/input/index.js';
 	import { Label } from '$lib/components/ui/label/index.js';
+	import { Separator } from '$lib/components/ui/separator/index.js';
 	import { updateKantongDistribusi } from '$lib/api/distribusi';
 	import { invalidateAll } from '$app/navigation';
 	import type { DistribusiUser } from '$lib/types/distribusi';
@@ -170,25 +171,28 @@
 		</Card.Root>
 
 		<!-- Floating Action Group -->
-		<div class="fixed bottom-8 left-0 right-0 px-4 flex justify-center z-50">
-			<ButtonGroup.Root class="w-full max-w-sm h-16 shadow-2xl rounded-full overflow-hidden bg-background border">
-				<Button 
-					variant="ghost" 
-					class="h-full w-[25%] text-2xl hover:bg-destructive/10 hover:text-destructive rounded-none"
+		<div class="fixed bottom-8 left-0 right-0 z-50 flex justify-center px-4">
+			<div class="flex h-16 w-full max-w-sm items-center overflow-hidden rounded-full border bg-background shadow-2xl">
+				<!-- Minus -->
+				<Button
+					variant="ghost"
+					class="h-full flex-1 rounded-none hover:bg-destructive/10 hover:text-destructive"
 					onclick={() => handlePanitiaUpdate(-1)}
 					disabled={actionLoading}
 				>
-					{#if actionLoading}<Spinner class="h-8 w-8" />{:else}<IconMinus class="h-8 w-8" />{/if}
+					{#if actionLoading}<Spinner class="h-6 w-6" />{:else}<IconMinus class="h-6 w-6" />{/if}
 				</Button>
+
+				<Separator orientation="vertical" class="h-8" />
 
 				<Dialog.Root bind:open={manualDialogOpen}>
 					<Dialog.Trigger>
-						<Button 
-							variant="ghost" 
-							class="h-full w-[50%] text-base font-semibold rounded-none"
+						<Button
+							variant="ghost"
+							class="h-full w-[50%] rounded-none text-base font-semibold"
 							disabled={actionLoading}
 						>
-							<IconRefresh class="h-5 w-5 mr-2" /> Manual
+							Manual
 						</Button>
 					</Dialog.Trigger>
 					<Dialog.Content class="sm:max-w-[420px]">
@@ -199,14 +203,14 @@
 							</Dialog.Description>
 						</Dialog.Header>
 						<Tabs.Root bind:value={manualMode} class="mt-2">
-							<Tabs.List class="grid grid-cols-2 w-full">
+							<Tabs.List class="grid w-full grid-cols-2">
 								<Tabs.Trigger value="kurangi">Kurangi</Tabs.Trigger>
 								<Tabs.Trigger value="tambah">Tambahkan</Tabs.Trigger>
 							</Tabs.List>
 							<Tabs.Content value="kurangi" class="pt-4">
 								<div class="grid gap-2">
 									<Label for="manual-kurangi">Jumlah</Label>
-									<Input 
+									<Input
 										id="manual-kurangi"
 										type="number"
 										min="1"
@@ -220,7 +224,7 @@
 							<Tabs.Content value="tambah" class="pt-4">
 								<div class="grid gap-2">
 									<Label for="manual-tambah">Jumlah</Label>
-									<Input 
+									<Input
 										id="manual-tambah"
 										type="number"
 										min="1"
@@ -233,7 +237,13 @@
 							</Tabs.Content>
 						</Tabs.Root>
 						<Dialog.Footer>
-							<Button variant="outline" onclick={() => (manualDialogOpen = false)} disabled={actionLoading}>Batal</Button>
+							<Button
+								variant="outline"
+								onclick={() => (manualDialogOpen = false)}
+								disabled={actionLoading}
+							>
+								Batal
+							</Button>
 							<Button onclick={submitManualDialog} disabled={actionLoading}>
 								{#if actionLoading}<Spinner class="mr-2" />{/if}
 								{actionLoading ? 'Menyimpan...' : 'Simpan'}
@@ -242,15 +252,17 @@
 					</Dialog.Content>
 				</Dialog.Root>
 
-				<Button 
-					variant="default" 
-					class="h-full w-[25%] text-2xl rounded-none"
+				<Separator orientation="vertical" class="h-8" />
+
+				<!-- Plus -->
+				<Button
+					variant="default"
+					class="h-full flex-1 rounded-none"
 					onclick={() => handlePanitiaUpdate(1)}
 					disabled={actionLoading}
 				>
-					{#if actionLoading}<Spinner class="h-8 w-8" />{:else}<IconPlus class="h-8 w-8" />{/if}
+					{#if actionLoading}<Spinner class="h-6 w-6" />{:else}<IconPlus class="h-6 w-6" />{/if}
 				</Button>
-			</ButtonGroup.Root>
+			</div>
 		</div>
-	</div>
 {/if}
