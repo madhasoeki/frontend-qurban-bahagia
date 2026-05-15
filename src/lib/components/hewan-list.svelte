@@ -62,7 +62,7 @@
 				{#if item.catatan}
 					<div class="flex gap-2">
 						<span class="w-20 shrink-0 text-muted-foreground">Catatan</span>
-						<span>{item.catatan}</span>
+						<span class="whitespace-pre-line">{item.catatan}</span>
 					</div>
 				{/if}
 				{#if catatanFooter}
@@ -112,7 +112,7 @@
 						</div>
 					</Table.Cell>
 					<Table.Cell>{item.pengawasNama}</Table.Cell>
-					<Table.Cell class="text-sm text-muted-foreground whitespace-normal break-words">
+					<Table.Cell class="text-sm text-muted-foreground whitespace-pre-line break-words">
 						{item.catatan || '-'}
 					</Table.Cell>
 					{#if extraCell}

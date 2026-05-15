@@ -469,7 +469,7 @@
                       class="text-[10px] text-amber-600 font-bold uppercase tracking-wider block mb-0.5"
                       >Catatan</span
                     >
-                    <p class="text-xs text-foreground leading-relaxed">
+                    <p class="text-xs text-foreground leading-relaxed whitespace-pre-line">
                       {row.catatan}
                     </p>
                   </div>
@@ -635,7 +635,7 @@
                 >{row.beratTulang ? `${row.beratTulang} Kg` : "-"}</Table.Cell
               >
               <Table.Cell
-                class="max-w-62.5 whitespace-normal wrap-break-word leading-relaxed text-gray-700"
+                class="max-w-62.5 whitespace-pre-line wrap-break-word leading-relaxed text-gray-700"
               >
                 {row.catatan || "-"}
               </Table.Cell>
